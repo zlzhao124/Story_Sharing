@@ -15,7 +15,7 @@
 		exit;
 	} 
 	else {
-		$hashedPass = password_hash($password, PASSWORD_BCRYPT);;
+		$hashedPass = password_hash($password, PASSWORD_DEFAULT);
 		$stmt = $mysqli->prepare("insert into users(username, password) values (?, ?)");
 		if(!$stmt){
 			printf("Query Prep Failed: %s\n", $mysqli->error);
