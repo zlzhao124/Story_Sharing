@@ -1,14 +1,12 @@
 <?php
 	require 'database.php';
 	$username = trim($_GET['username']);
-
-	if(!preg_match('/^[\w_\.\-]+$/', $username))
-	{
-		echo $username."Invalid username";
-		exit;
-
-	}
-
+	
+	// if(!preg_match('/^[\w_\.\-]+$/', $username))
+	// {
+	// 	echo $username."Invalid username";
+	// 	exit;
+	// }
 	$password = trim($_GET['password']);
 	$repass = trim($_GET['repass']);
 
