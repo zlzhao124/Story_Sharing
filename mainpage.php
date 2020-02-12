@@ -22,7 +22,7 @@
 <?php
  require 'database.php';
  session_start();
- $user = $_SESSION['user'];
+ $username = $_SESSION['username'];
 
  $stmt = $mysqli->prepare("select username, story_title, story_content, link, story_id from story");
  if(!$stmt)
@@ -31,9 +31,10 @@
      exit;
  }
  $stmt->execute();
- $stmt->bind_result($user, $story_title, $story_content, $link, $story_id);
+
+ $stmt->bind_result($username, $story_title, $story_content, $link, $story_id);
  echo"<h1>A list of current stories and comments</h1><br /> ";
- echo "Hi, <i>".$user."</i> ! Welcome to the News Sharing Site!!<br />";
+ echo "Hi, <i>".$username."</i> ! Welcome to the News Sharing Site!!<br />";
  echo"Username, Title, Content";
  echo "<br /><br />";
 
@@ -50,20 +51,22 @@ $stmt->close();
 
  ?>
 
-
-
 <p>Here you can upload stories:<p>
 
-<p>stories titles<p>
-<textarea rows="6" cols="100" placeholder="Please type story title here." name="content" id="content"></textarea>
+        <form action = "poststory.php" methods = "POST">
+    <label>New Story Title:</label>
+    <input type="text" name="storytitle" id="storytitle" />
+    <label>stories content:</label>
+    <textarea rows="6" cols="100" placeholder="Please type story content here." name="content" id="content"></textarea>
+    <label> Story Link:</label>
+    <input type="text" name = "st_link" id = "st_link" />
+    <label> Story id:</label>
+    <input type="integer" name = "story_id" id = "story_id" />
 
-<p>stories content<p>
-<textarea rows="6" cols="100" placeholder="Please type story content here." name="content" id="content"></textarea>
 
-<label>Link:</label>
-<input type="text" name="link" id="link" />
-<br />
-<input type= "submit" value = "POST" />
+<input type= "submit" name = "submit" value = "submit" />
+
+</form>
 
 </body>
  </html>

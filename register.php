@@ -1,20 +1,19 @@
 <?php
 	require 'database.php';
-	$username = trim($_GET['username']);
+	$username = trim($_POST['username']);
 	
 	// if(!preg_match('/^[\w_\.\-]+$/', $username))
 	// {
 	// 	echo $username."Invalid username";
 	// 	exit;
 	// }
-	$password = trim($_GET['password']);
-	$repass = trim($_GET['repass']);
+	$password = trim($_POST['password']);
+	$repass = trim($_POST['repass']);
 
 	if($password != $repass){
 		echo "Please enter the same password";
 		exit;
 	} 
-
 	else {
 		$hashedPass = password_hash($password, PASSWORD_BCRYPT);;
 		$stmt = $mysqli->prepare("insert into users(username, password) values (?, ?)");
@@ -25,6 +24,13 @@
 		$stmt->bind_param('ss', $username, $hashedPass);
 		$stmt->execute();
 		$stmt->close();
+
+		session_start();
+		$_SESSION['username'] = $username;
+
 		header("Location: login.html");
 	}
+
+
+
 ?>
