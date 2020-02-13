@@ -22,7 +22,7 @@
 <?php
  require 'database.php';
  session_start();
- $username = $_SESSION['username'];
+ $username1 = $_SESSION['username'];
 
  $stmt = $mysqli->prepare("select username, story_title, story_content, link, story_id from story");
  if(!$stmt)
@@ -34,17 +34,19 @@
 
  $stmt->bind_result($username, $story_title, $story_content, $link, $story_id);
  echo"<h1>A list of current stories and comments</h1><br /> ";
- echo "Hi, <i>".$username."</i> ! Welcome to the News Sharing Site!!<br />";
+ echo "Hi, <i>".$username1."</i> ! Welcome to the News Sharing Site!!<br />";
  echo"Username, Title, Content";
  echo "<br /><br />";
 
  while($stmt->fetch()){
-    printf("%s,%s,%s,%s<br />", 
-    htmlspecialchars("Storytitle :".$story_title), 
-    htmlspecialchars("Story content:" .$story_content), 
+    printf("%s,%s,%s,%s<br />",
+    htmlspecialchars("Story user:".$username),
+    htmlspecialchars("Storytitle :".$story_title),
+    htmlspecialchars("Story content:" .$story_content),
     htmlspecialchars("Story id" .$story_id),
-     htmlspecialchars("Story id:" .$link));
-    
+    htmlspecialchars("Story id:" .$link));
+    echo "<a href=comment.php?sid=$story_id&suser=$username>Comment on This Story</a>";
+    echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
     echo "<a href=view.php?val=$story_id>View Story Comments</a>";
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
     echo "<a href=delete.php?val=$story_id>Delete Story with its comments</a>";//delete
@@ -75,5 +77,11 @@ $stmt->close();
 
 </form>
 
+<!--
+<form action = "comment.html" methods = "POST">
+Click here to comment on stories:
+ <input type= "submit" name = "comment" value = "comment" />
+</form>
+-->
 </body>
  </html>
