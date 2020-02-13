@@ -39,30 +39,37 @@
  echo "<br /><br />";
 
  while($stmt->fetch()){
-    printf("%s,%s,%s,%s<br />", htmlspecialchars($author), htmlspecialchars($title), htmlspecialchars($content), htmlspecialchars($link));
-    echo "<a href=viewStory.php?val=$story_id>View Comments</a>";//view
+    printf("%s,%s,%s,%s<br />", 
+    htmlspecialchars("Storytitle :".$story_title), 
+    htmlspecialchars("Story content:" .$story_content), 
+    htmlspecialchars("Story id" .$story_id),
+     htmlspecialchars("Story id:" .$link));
+    
+    echo "<a href=view.php?val=$story_id>View Story Comments</a>";
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
-    echo "<a href=deleteStory.php?val=$story_id>Delete Story with its comments</a>";//delete
+    echo "<a href=delete.php?val=$story_id>Delete Story with its comments</a>";//delete
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
-    echo "<a href=editStory.php?val=$story_id>Edit Story content</a>";//edit
+    echo "<a href=edit.php?val=$story_id>Edit Story content</a>";//edit
     echo "<br /><br />";
 }
 $stmt->close();
 
  ?>
 
-<p>Here you can upload stories:<p>
+<p>You can upload stories here :<p>
 
         <form action = "poststory.php" methods = "POST">
+
+    <label>Please enter your Username:</label>
+    <input type="text" name="username" id="username" />
     <label>New Story Title:</label>
     <input type="text" name="storytitle" id="storytitle" />
-    <label>stories content:</label>
-    <textarea rows="6" cols="100" placeholder="Please type story content here." name="content" id="content"></textarea>
+    <label>Stories content:</label>
+    <textarea rows="6" cols="150" placeholder="Please type story content here." name="content" id="content"></textarea>
     <label> Story Link:</label>
-    <input type="text" name = "st_link" id = "st_link" />
+    <input type="text" name = "link" id = "link" />
     <label> Story id:</label>
     <input type="integer" name = "story_id" id = "story_id" />
-
 
 <input type= "submit" name = "submit" value = "submit" />
 

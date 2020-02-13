@@ -14,10 +14,7 @@ $stmt->execute();
 $stmt->bind_result($cnt, $username, $hashedPass);
 $stmt->fetch();
 $stmt->close();
-//$cnt == 1 &&
-// Compare the submitted password to the actual password hash
-// echo password_hash($pwd_guess, PASSWORD_DEFAULT);
-// echo "other one: " . $hashedPass;
+
 if(password_verify($pwd_guess, $hashedPass)){
 	// Login succeeded!
 	session_start();
