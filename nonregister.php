@@ -1,13 +1,10 @@
+
+  
 <!DOCTYPE html>
 <html lang = 'en'>
     <head>
         <meta charset="utf-8"/>
         <title>Main Story Web page</title>
-
-        <form action = "logout.php" methods = "POST">
-        <input type= "submit" name = "Log Out" value = "Log Out" />
-        </form>
-
     </head>
 
     <style>
@@ -37,9 +34,9 @@
  $stmt->execute();
 
  $stmt->bind_result($username, $story_title, $story_content, $link, $story_id);
- echo"<h1>Story Sharing Site</h1><br /> ";
- echo "Hi, our dear user  <i>".$username1."</i> ! Welcome to the Story Sharing Site!!<br />";
- echo "You can see a list of stories and their comments below.<br />";
+ echo"<h1>A list of current stories and comments</h1><br /> ";
+ echo "Hi, <i>".$username1."</i> ! Welcome to the News Sharing Site!!<br />";
+ echo"Username, Title, Content";
  echo "<br /><br />";
 
  while($stmt->fetch()){
@@ -51,7 +48,7 @@
     htmlspecialchars("Story id:" .$link));
     echo "<a href=comment.php?sid=$story_id&suser=$username>Comment on This Story</a>";
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
-    echo "<a href=viewcomment.php?val=$story_id>View Story Comments</a>";
+    echo "<a href=view.php?val=$story_id>View Story Comments</a>";
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
     echo "<a href=delete.php?val=$story_id>Delete Story with its comments</a>";//delete
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
@@ -66,7 +63,7 @@ $stmt->close();
 
         <form action = "poststory.php" methods = "POST">
 
-    <label>Please enter your Username(must be same as your login username!):</label>
+    <label>Please enter your Username:</label>
     <input type="text" name="username" id="username" />
     <label>New Story Title:</label>
     <input type="text" name="storytitle" id="storytitle" />

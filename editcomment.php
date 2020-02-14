@@ -8,13 +8,14 @@
 require 'database.php';
 
 session_start();
-$s_username = $_GET['loginuser'];
+$c_username = $_SESSION['username'];
+$s_username = $_GET['suser'];
 $story_id =  $_GET['sid'];
 
 $linkstring =  "comment2.php?sid=".$story_id."&loginuser=".$s_username;
 
 
-$stmt = $mysqli->prepare("select username from story where story_id=?");
+$stmt = $mysqli->prepare("select s_username from comments where story_id=?");
 if(!$stmt){
     printf("Query Prep Failed: %s\n", $mysqli->error);
     exit;
@@ -30,6 +31,6 @@ $stmt->close();
 
 if ($s_username!=$username){
     echo "You can only edit the story you created!!!";
-    header("Location: main.php");
+    header("Location: mainpage.php");
 }
 ?>
