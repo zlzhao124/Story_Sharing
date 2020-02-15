@@ -37,8 +37,9 @@
 
  echo("You can view story and comments below as an unregistered user. <br /><br />");
                 while($stmt->fetch()){
+            echo "Username: ".$username."<br />";
             echo "Link: ".$link."<br />";
-                        echo "Title: ".$story_title."<br />";
+            echo "Title: ".$story_title."<br />";
             echo "Content: ".$story_content."<br />";
             echo "ID: ".$story_id."<br /><br />";
             echo "<a href=viewcomment.php?val=$story_id&suser=$username>View Story Comments</a>";

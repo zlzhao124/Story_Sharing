@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head><title>Bold Printer</title></head>
+
+
 <body>
 <style>
     body{font-size:100%; background-color:#eaf0bb;
@@ -13,6 +15,14 @@
     form{ display:inline-block};
 
 </style>
+
+
+<!-- <form action="nonregister.php" method="POST">
+<input type="submit" name="Back to view story value="back " />
+</form>
+
+ -->
+
 
 
 <?php
@@ -44,8 +54,10 @@ echo "<br /><br />";
 }
 $stmt->close();
 
-
-
 ?>
+
+
+
+
 </body>
 </html>
