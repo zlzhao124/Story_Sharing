@@ -42,19 +42,24 @@
  echo "<br /><br />";
 
  while($stmt->fetch()){
-    printf("%s,%s,%s,%s<br />",
+    printf("%s,%s,%s,%s,%s <br />",
     htmlspecialchars("Story user:".$username),
     htmlspecialchars("Storytitle :".$story_title),
     htmlspecialchars("Story content:" .$story_content),
     htmlspecialchars("Story id" .$story_id),
-    htmlspecialchars("Story id:" .$link));
+    htmlspecialchars("Story Link:" .$link));
     echo "<a href=comment.php?sid=$story_id&suser=$username>Comment on This Story</a>";
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
     echo "<a href=viewcomment.php?val=$story_id&suser=$username>View Story Comments</a>";
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
 echo "<a href=deleteboth.php?sid=$story_id&suser=$username>Delete Story with its comments</a>";//delete
+echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
    echo "<a href=editstory.php?sid=$story_id&suser=$username>Edit Story content</a>";//edit
     echo "<br /><br />";
+
+    echo "<a href=like.php?sid=$story_id&suser=$username>Like</a>";//ed
+    echo "<br /><br />";
+
 }
 $stmt->close();
 
@@ -86,6 +91,16 @@ $stmt->close();
 
 </form>
 
+
+<h1>
+
+<br /><br /><br /><br />
+
+
+
+
+
+<h1>
 
 
 </body>
