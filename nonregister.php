@@ -1,5 +1,3 @@
-
-  
 <!DOCTYPE html>
 <html lang = 'en'>
     <head>
@@ -14,75 +12,57 @@
     font-size: 30px;
      text-align: center
       };
-
     form{ display:inline-block};
 
 </style>
-
 <body>
+<form action="logout.php" method="POST"> 
+<input type="submit" name="Back to Login Page" value="Back to Login Page" />
+</form>
+
 <?php
  require 'database.php';
  session_start();
- $username1 = $_SESSION['username'];
 
- $stmt = $mysqli->prepare("select username, story_title, story_content, link, story_id from story");
+ $stmt = $mysqli->prepare("select story_title, story_content, link, story_id from story");
+
  if(!$stmt)
  {
      printf("Query Prep Failed: %s\n", $mysqli->error);
      exit;
  }
  $stmt->execute();
+ $stmt->bind_result( $story_title, $story_content, $link, $story_id);
+ echo"<h1>Welcome to Story Sharing Site!</h1><br /> ";
 
- $stmt->bind_result($username, $story_title, $story_content, $link, $story_id);
- echo"<h1>A list of current stories and comments</h1><br /> ";
- echo "Hi, <i>".$username1."</i> ! Welcome to the News Sharing Site!!<br />";
- echo"Username, Title, Content";
- echo "<br /><br />";
+ echo("You can view story and comments below as an unregistered user. <br /><br />");
+		while($stmt->fetch()){
+            echo "Link: ".$link."<br />";
+			echo "Title: ".$story_title."<br />";
+            echo "Content: ".$story_content."<br />";
+            echo "ID: ".$story_id."<br /><br />";
+            echo "<a href=viewcomment.php?val=$story_id>View Story Comments</a>";
+            echo "<br /><br />";
+        }
+        $stmt->close();
+ 
 
- while($stmt->fetch()){
-    printf("%s,%s,%s,%s<br />",
-    htmlspecialchars("Story user:".$username),
-    htmlspecialchars("Storytitle :".$story_title),
-    htmlspecialchars("Story content:" .$story_content),
-    htmlspecialchars("Story id" .$story_id),
-    htmlspecialchars("Story id:" .$link));
-    echo "<a href=comment.php?sid=$story_id&suser=$username>Comment on This Story</a>";
-    echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
-    echo "<a href=view.php?val=$story_id>View Story Comments</a>";
-    echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
-    echo "<a href=delete.php?val=$story_id>Delete Story with its comments</a>";//delete
-    echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
-    echo "<a href=edit.php?val=$story_id>Edit Story content</a>";//edit
-    echo "<br /><br />";
-}
-$stmt->close();
+        $stmt1 = $mysqli->prepare("select comment,c_username,story_id from comments");
+        if(!$stmt)
+        {
+            printf("Query Prep Failed: %s\n", $mysqli->error);
+            exit;
+        }
+        // $stmt1->execute();
+        // $stmt1->bind_result( $comment, $c_username,$story_id );
 
+        // while($stmt1->fetch()){
+        //     echo "For Story_id ".$story_id."<br />";
+        //     echo "Comment: ".$comment."<br />";
+		// 	echo "By User: ".$c_username."<br /><br />";
+        // }
+        // $stmt1->close();
  ?>
 
-<p>You can upload stories here :<p>
-
-        <form action = "poststory.php" methods = "POST">
-
-    <label>Please enter your Username:</label>
-    <input type="text" name="username" id="username" />
-    <label>New Story Title:</label>
-    <input type="text" name="storytitle" id="storytitle" />
-    <label>Stories content:</label>
-    <textarea rows="6" cols="150" placeholder="Please type story content here." name="content" id="content"></textarea>
-    <label> Story Link:</label>
-    <input type="text" name = "link" id = "link" />
-    <label> Story id:</label>
-    <input type="integer" name = "story_id" id = "story_id" />
-
-<input type= "submit" name = "submit" value = "submit" />
-
-</form>
-
-<!--
-<form action = "comment.html" methods = "POST">
-Click here to comment on stories:
- <input type= "submit" name = "comment" value = "comment" />
-</form>
--->
 </body>
  </html>
