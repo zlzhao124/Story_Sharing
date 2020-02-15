@@ -19,12 +19,8 @@
  require 'database.php';
  session_start();
  $user = $_SESSION['username'];
- //echo $user;
- $storyid = $_GET['val'];
- $suser = $_GET['suser'];
- //echo $suser;
 
- $stmt = $mysqli->prepare("select c_username,comment,story_id from comments where story_id =".$storyid." AND s_username = '".$suser."'");
+ $stmt = $mysqli->prepare("select s_username,comment,story_id,comment_id from comments where c_username = '".$user."'");
 //where story_id=?"
 //now i can see every comment of every story but we dont want that
  if(!$stmt)
@@ -33,14 +29,20 @@
      exit;
  }
  $stmt->execute();
- $stmt->bind_result( $c_username,$comment, $story_id) ;
+ $stmt->bind_result( $s_username,$comment, $story_id, $comment_id) ;
 
  echo("View Comments<br />");
 echo "<br /><br />";
  while($stmt->fetch()){
     echo "<br /><br />";
-    echo "*By User ".$c_username." <br /><br /> ";
-    echo "comments: ".$comment."  ";
+    echo "*Story User ".$s_username." <br /><br /> ";
+    echo "comment: ".$comment."  ";
+    echo "<br /><br />";
+    echo "story id:".$story_id;
+    echo "<a href=editcomment.php?sid=$story_id&suser=$s_username&comm=$comment_id>Edit Comment</a>";
+    echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
+    echo "<a href=deleteusercomment.php?sid=$story_id&suser=$s_username&comm=$comment_id>Delete Comment</a>";
+    echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
 }
 $stmt->close();
 

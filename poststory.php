@@ -7,17 +7,11 @@
     $story_content = $_GET['content'];
     $link = $_GET['link'];
 
+    $user = $_SESSION['username'];
+    echo $user;
 
-    // echo $username;
-    // echo "<br>";
-    // echo $story_id;
-    // echo "<br>";
-    // echo $story_title;
-    // echo "<br>";
-    // echo $story_content;
-    // echo "<br>";
-    // echo $link;
-
+    
+if ($username == $user){
     $stmt = $mysqli->prepare("insert into story(username, story_id, story_title,story_content, link) values (?,?, ?, ?, ?)");
     if(!$stmt){
         printf("Query Prep Failed: %s\n", $mysqli->error);
@@ -27,7 +21,9 @@
     if (!$stmt->execute()){
         echo "Fail to post";
     }
-    
+
     $stmt->close();
-header("Location: mainpage.php");
+
+}
+    header("Location: mainpage.php");
     ?>

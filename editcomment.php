@@ -8,29 +8,26 @@
 require 'database.php';
 
 session_start();
-$c_username = $_SESSION['username'];
+$current_user = $_SESSION['username'];
 $s_username = $_GET['suser'];
 $story_id =  $_GET['sid'];
+$comment_id = $_GET['comm'];
 
-$linkstring =  "comment2.php?sid=".$story_id."&loginuser=".$s_username;
+$linkstring =  "editcomment2.php?sid=".$story_id."&suser=".$s_username."&comm=".$comment_id;
 
-
-$stmt = $mysqli->prepare("select s_username from comments where story_id=?");
-if(!$stmt){
-    printf("Query Prep Failed: %s\n", $mysqli->error);
-    exit;
-}
-$stmt->bind_param('ssss', $s_username,  $story_id);
-if (!$stmt->execute()){
-    echo "Fail to have username";
-}
-
-$stmt->bind_result($username);
-$stmt->fetch();
-$stmt->close();
-
-if ($s_username!=$username){
-    echo "You can only edit the story you created!!!";
-    header("Location: mainpage.php");
-}
 ?>
+
+<form action="<?php echo $linkstring; ?>"  method="POST">
+        <p>
+                <label for="name">Retype your comment here to update it:</label>
+                <textarea rows="6" cols="150" placeholder="Please type updated comment here." name="comment" id="comment"></textarea>
+
+        </p>
+        <p>
+                <input type="submit" value="Comment" />
+        </p>
+</form>
+
+</body>
+
+</html>

@@ -8,28 +8,31 @@
 require 'database.php';
 
 session_start();
-$s_username = $_GET['loginuser'];
+$current_user = $_SESSION['username'];
+$s_username = $_GET['suser'];
 $story_id =  $_GET['sid'];
 
-$linkstring =  "comment2.php?sid=".$story_id."&loginuser=".$s_username;
+$linkstring =  "editstory2.php?sid=".$story_id."&suser=".$s_username;
 
 
-$stmt = $mysqli->prepare("select username from story where story_id=?");
-if(!$stmt){
-    printf("Query Prep Failed: %s\n", $mysqli->error);
-    exit;
-}
-$stmt->bind_param('ssss', $s_username,  $story_id);
-if (!$stmt->execute()){
-    echo "Fail to have username";
-}
-
-$stmt->bind_result($username);
-$stmt->fetch();
-$stmt->close();
-
-if ($s_username!=$username){
+if ($s_username!=$current_user){
     echo "You can only edit the story you created!!!";
-    header("Location: main.php");
+    header("Location: mainpage.php");
 }
 ?>
+
+<form action="<?php echo $linkstring; ?>"  method="POST">
+        <p>
+                <label for="name">Retype your story here to update it:</label>
+                <textarea rows="6" cols="150" placeholder="Please type story content here." name="content" id="content"></textarea>
+
+        </p>
+        <p>
+                <input type="submit" value="Comment" />
+        </p>
+</form>
+
+</body>
+
+</html>
+
