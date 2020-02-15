@@ -33,8 +33,9 @@
  }
  $stmt->execute();
  $stmt->bind_result($username, $story_title, $story_content, $link, $story_id);
-echo"<h1>Welcome to Story Sharing Site!</h1><br /> ";
-echo("You can view story and comments below as an unregistered user. <br /><br />");
+ echo"<h1>Welcome to Story Sharing Site!</h1><br /> ";
+
+ echo("You can view story and comments below as an unregistered user. <br /><br />");
                 while($stmt->fetch()){
             echo "Link: ".$link."<br />";
                         echo "Title: ".$story_title."<br />";
@@ -52,15 +53,7 @@ echo("You can view story and comments below as an unregistered user. <br /><br /
             printf("Query Prep Failed: %s\n", $mysqli->error);
             exit;
         }
-        // $stmt1->execute();
-        // $stmt1->bind_result( $comment, $c_username,$story_id );
 
-        // while($stmt1->fetch()){
-        //     echo "For Story_id ".$story_id."<br />";
-        //     echo "Comment: ".$comment."<br />";
-                //      echo "By User: ".$c_username."<br /><br />";
-        // }
-        // $stmt1->close();
  ?>
 
 </body>
