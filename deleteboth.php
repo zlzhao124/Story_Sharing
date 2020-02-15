@@ -36,7 +36,7 @@ $stmt2 = $mysqli->prepare("delete from comments where story_id = ? AND s_usernam
     $stmt2->bind_param('is', $story_id, $s_username);
     $stmt2->execute();
     $stmt2->close();
-   // header("Location: mainpage.php");
+  
 
     $stmt1 = $mysqli->prepare("delete from story where story_id = ? AND username = ?");
     if(!$stmt1){
