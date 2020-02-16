@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head><title>Bold Printer</title></head>
@@ -24,7 +25,7 @@
  $stmt = $mysqli->prepare("select story_title, link, story_id from story where username = '".$viewinguser."'");
 
  if(!$stmt)
- {
+ {   
      printf("Query Prep Failed: %s\n", $mysqli->error);
      exit;
  }
@@ -46,7 +47,7 @@ $stmt->close();
  $stmt2 = $mysqli->prepare("select s_username, story_id, comment from comments where c_username = '".$viewinguser."'");
 
  if(!$stmt2)
- {
+ {   
      printf("Query Prep Failed: %s\n", $mysqli->error);
      exit;
  }
@@ -92,7 +93,7 @@ echo "<br /><br />";
     echo "Story title: ".$storytitle;
     echo "<br />";
     echo "Story link: ";
-    echo "<a href=viewcontents.php?sid=$id&suser=$viewinguser>".$link."</a>";
+    echo "<a href=viewcontents.php?sid=$id&suser=$storyuser>".$link."</a>";
     echo "<br /><br />";
 
 }
@@ -111,5 +112,3 @@ $stmt3->close();
 
 </body>
 </html>
-
-
