@@ -5,11 +5,11 @@ include 'editstory.php';
 $update = $_POST['content'];
 
     echo $s_username;
-echo "<br>";
+    echo "<br>";
     echo $story_id;
-echo "<br>";
-echo $update;
-
+    echo "<br>";
+    echo $update;
+//takes in posted story content and sends it to the sql story table
 $stmt = $mysqli->prepare("update story set story_content = ? where story_id = ?");
 if(!$stmt){
     printf("Query Prep Failed: %s\n", $mysqli->error);
@@ -20,7 +20,7 @@ if (!$stmt->execute()){
     echo "Fail to update :( ";
 }
 
-//$stmt->bind_result($username);
+
 $stmt->fetch();
 $stmt->close();
 
@@ -28,5 +28,3 @@ $stmt->close();
 header("Location: mainpage.php");
 
 ?>
-
-

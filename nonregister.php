@@ -23,7 +23,8 @@
 <?php
  require 'database.php';
  session_start();
-
+//as a nonregistered user, only stories and comments can be viewed. ON this page one can view stories, and we can click on each 
+//specific story to view all the comments
  $stmt = $mysqli->prepare("select username, story_title, story_content, link, story_id from story");
 
  if(!$stmt)
@@ -38,24 +39,20 @@
  echo("You can view story and comments below as an unregistered user. <br /><br />");
                 while($stmt->fetch()){
             echo "Username: ".$username."<br />";
-            echo "Link: ".$link."<br />";
+           // echo "Link: ".$link."<br />";
             echo "Title: ".$story_title."<br />";
-            echo "Content: ".$story_content."<br />";
+           // echo "Content: ".$story_content."<br />";
             echo "ID: ".$story_id."<br /><br />";
+            echo "Link:";
+            echo "<a href=viewcontents.php?sid=$story_id&suser=$username>".$link."</a> ";
+            //echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
+            echo "<br /><br />";
             echo "<a href=viewcomment.php?val=$story_id&suser=$username>View Story Comments</a>";
             echo "<br /><br />";
         }
         $stmt->close();
 
-
-        $stmt1 = $mysqli->prepare("select comment,c_username,story_id from comments");
-        if(!$stmt)
-        {
-            printf("Query Prep Failed: %s\n", $mysqli->error);
-            exit;
-        }
-
- ?>
+?>
 
 </body>
  </html>

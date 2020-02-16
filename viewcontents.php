@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><title>Comment View</title></head>
+<head><title>View a story</title></head>
 <body>
 <style>
     body{font-size:100%; background-color:#eaf0bb;
@@ -19,12 +19,11 @@
  require 'database.php';
  session_start();
  $user = $_SESSION['username'];
-
- $storyid = $_GET['val'];
+ $storyid = $_GET['sid'];
  $suser = $_GET['suser'];
 
-//gets all the comments for a story
- $stmt = $mysqli->prepare("select c_username,comment,story_id from comments where story_id =".$storyid." AND s_username = '".$suser."'");
+//gets the title and the content of the story that the link redirected us to
+ $stmt = $mysqli->prepare("select story_title, story_content from story where story_id =".$storyid." AND username = '".$suser."'");
 
  if(!$stmt)
  {
@@ -32,14 +31,14 @@
      exit;
  }
  $stmt->execute();
- $stmt->bind_result( $c_username,$comment, $story_id) ;
+ $stmt->bind_result( $title, $content) ;
 
- echo("View Comments<br />");
+
 echo "<br /><br />";
  while($stmt->fetch()){
+    echo "Title:".$title;
     echo "<br /><br />";
-    echo "*By User ".$c_username." <br /><br /> ";
-    echo "comments: ".$comment."  ";
+    echo $content;
 }
 $stmt->close();
 
@@ -48,4 +47,5 @@ $stmt->close();
 ?>
 </body>
 </html>
+
 

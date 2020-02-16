@@ -26,8 +26,8 @@
  require 'database.php';
  session_start();
  $username1 = $_SESSION['username'];
-
- $stmt = $mysqli->prepare("select username, story_title, story_content, link, story_id from story");
+ //lists out all the stories on the front page first by fetching all of them from the story table
+ $stmt = $mysqli->prepare("select username, story_title, story_content, link, story_id, numlikes from story");
  if(!$stmt)
  {
      printf("Query Prep Failed: %s\n", $mysqli->error);
@@ -35,34 +35,43 @@
  }
  $stmt->execute();
 
- $stmt->bind_result($username, $story_title, $story_content, $link, $story_id);
+ $stmt->bind_result($username, $story_title, $story_content, $link, $story_id, $numlikes);
  echo"<h1>Story Sharing Site</h1><br /> ";
  echo "Hi, our dear user  <i>".$username1."</i> ! Welcome to the Story Sharing Site!!<br />";
  echo "You can see a list of stories and their comments below.<br />";
  echo "<br /><br />";
+//above is the introduction message, below is code for printing out all the stories and various options for each of them. 
 
  while($stmt->fetch()){
-    printf("%s,%s,%s,%s,%s <br />",
+    printf("%s,%s,%s, %s <br />",
     htmlspecialchars("Story user:".$username),
     htmlspecialchars("Storytitle :".$story_title),
-    htmlspecialchars("Story content:" .$story_content),
-    htmlspecialchars("Story id" .$story_id),
-    htmlspecialchars("Story Link:" .$link));
+    //htmlspecialchars("Story content:" .$story_content),
+    htmlspecialchars("Story id: ".$story_id),
+    //htmlspecialchars("Story Link:" .$link));
+    htmlspecialchars("Number of likes: ".$numlikes));
+    echo "Link:";
+    echo "<a href=viewcontents.php?sid=$story_id&suser=$username>".$link."</a> ";
+    echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
     echo "<a href=comment.php?sid=$story_id&suser=$username>Comment on This Story</a>";
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
     echo "<a href=viewcomment.php?val=$story_id&suser=$username>View Story Comments</a>";
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
-echo "<a href=deleteboth.php?sid=$story_id&suser=$username>Delete Story with its comments</a>";//delete
-echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
-   echo "<a href=editstory.php?sid=$story_id&suser=$username>Edit Story content</a>";//edit
-    echo "<br /><br />";
+    echo "<a href=deleteboth.php?sid=$story_id&suser=$username>Delete Story with its comments</a>";//delete
+    echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
+    echo "<a href=editstory.php?sid=$story_id&suser=$username>Edit Story content</a>";//edit
+    echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
+    echo "<a href=editstorytitle.php?sid=$story_id&suser=$username>Edit Story title or link</a>";//edit
+    echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
 
     echo "<a href=like.php?sid=$story_id&suser=$username>Like</a>";//ed
+    echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
+    echo "<a href=dislike.php?sid=$story_id&suser=$username>Dislike</a>";//ed
     echo "<br /><br />";
 
 }
 $stmt->close();
-
+//below are various forms for the other options you can do on the main page, such as uploading a story, viewing your own comments, and viewing profiles.
  ?>
 
 <p>You can upload stories here :<p>
@@ -90,6 +99,13 @@ $stmt->close();
 <input type= "submit" name = "view" value = "View_Comments" />
 
 </form>
+
+<form action = "viewprofiles.php" methods = "POST">
+<label> Here you can view profiles for all the users:</label>
+<input type= "submit" name = "view" value = "View_Profiles" />
+
+</form>
+
 
 
 <h1>

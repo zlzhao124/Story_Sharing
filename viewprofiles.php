@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><title>Comment View</title></head>
+<head><title>ViewFiles</title></head>
 <body>
 <style>
     body{font-size:100%; background-color:#eaf0bb;
@@ -19,12 +19,8 @@
  require 'database.php';
  session_start();
  $user = $_SESSION['username'];
-
- $storyid = $_GET['val'];
- $suser = $_GET['suser'];
-
-//gets all the comments for a story
- $stmt = $mysqli->prepare("select c_username,comment,story_id from comments where story_id =".$storyid." AND s_username = '".$suser."'");
+//will show a list of all registered users that we get from the SQL
+ $stmt = $mysqli->prepare("select username from users");
 
  if(!$stmt)
  {
@@ -32,20 +28,26 @@
      exit;
  }
  $stmt->execute();
- $stmt->bind_result( $c_username,$comment, $story_id) ;
+ $stmt->bind_result( $username) ;
 
- echo("View Comments<br />");
+ echo("View Users<br />");
 echo "<br /><br />";
  while($stmt->fetch()){
     echo "<br /><br />";
-    echo "*By User ".$c_username." <br /><br /> ";
-    echo "comments: ".$comment."  ";
+    echo $username;
+    echo "<a href=viewspecprof.php?user=$username>View this user</a>";
+    echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
+
 }
 $stmt->close();
 
 
 
 ?>
+
+<form action = "mainpage.php" methods = "POST">
+<input type= "submit" name = "view" value = "Go Back" />
+</form>
+
 </body>
 </html>
-

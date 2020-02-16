@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><title>Bold Printer</title></head>
+<head><title>View Your Comments</title></head>
 <body>
 <style>
     body{font-size:100%; background-color:#eaf0bb;
@@ -19,10 +19,9 @@
  require 'database.php';
  session_start();
  $user = $_SESSION['username'];
-
+ //gets all the comments made by a user (returns the story and the comment)
  $stmt = $mysqli->prepare("select s_username,comment,story_id,comment_id from comments where c_username = '".$user."'");
-//where story_id=?"
-//now i can see every comment of every story but we dont want that
+
  if(!$stmt)
  {
      printf("Query Prep Failed: %s\n", $mysqli->error);
@@ -49,5 +48,10 @@ $stmt->close();
 
 
 ?>
+
+<form action = "mainpage.php" methods = "POST">
+<input type= "submit" name = "view" value = "Go Back" />
+</form>
+
 </body>
 </html>

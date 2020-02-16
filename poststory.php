@@ -8,9 +8,9 @@
     $link = $_GET['link'];
 
     $user = $_SESSION['username'];
-    echo $user;
+//    echo $user;
 
-    
+  //inserts stuff from textboxes on main page (all the story info) into our sql table for stories 
 if ($username == $user){
     $stmt = $mysqli->prepare("insert into story(username, story_id, story_title,story_content, link) values (?,?, ?, ?, ?)");
     if(!$stmt){

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><title>Bold Printer</title></head>
+<head><title>Edit Comment</title></head>
 <body>
 
 <?php
@@ -11,20 +11,16 @@ session_start();
 $current_user = $_SESSION['username'];
 $s_username = $_GET['suser'];
 $story_id =  $_GET['sid'];
+$comment_id = $_GET['comm'];
+//linkstring to get to editcomment2.php with the same get values
+$linkstring =  "editcomment2.php?sid=".$story_id."&suser=".$s_username."&comm=".$comment_id;
 
-$linkstring =  "editstory2.php?sid=".$story_id."&suser=".$s_username;
-
-
-if ($s_username!=$current_user){
-    echo "You can only edit the story you created!!!";
-    header("Location: mainpage.php");
-}
 ?>
-
+<!-- this form allows you to edit a current comment -->
 <form action="<?php echo $linkstring; ?>"  method="POST">
         <p>
-                <label for="name">Retype your story here to update it:</label>
-                <textarea rows="6" cols="150" placeholder="Please type story content here." name="content" id="content"></textarea>
+                <label for="name">Retype your comment here to update it:</label>
+                <textarea rows="6" cols="150" placeholder="Please type updated comment here." name="comment" id="comment"></textarea>
 
         </p>
         <p>
