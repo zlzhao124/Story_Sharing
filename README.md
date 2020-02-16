@@ -1,4 +1,16 @@
 # CSE330
-REPLACE-THIS-TEXT-WITH-YOUR-STUDENT-ID
+464082 Helen Jiang
+466205 Zach Zhao
 
-REPLACE-THIS-TEXT-WITH-YOUR-PARTNERS-STUDENT-ID-IF-WORKING-IN-A-GROUP
+
+Creative Portion
+•We added a like function to stories. Essentially, users can like and unlike any stories that they so choose. Users can like a story at most once.  
+
+•We added a segment where users can view the profile of all the registered users. This includes viewing their stories, comments, and stories they have liked.
+
+•Back buttons were created for certain pages for convenience. 
+
+•Registered users can edit story title and story link.
+
+•Users can view their own comments. (For us, this page actually leads to the editing and deleting of a user’s own comments, but technically this page isn’t required so we put it as part of our creative portion)
+
