@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang = 'en'>
     <head>
@@ -46,12 +47,13 @@
     printf("%s,%s,%s, %s <br />",
     htmlspecialchars("Story user:".$username),
     htmlspecialchars("Storytitle :".$story_title),
-    //htmlspecialchars("Story content:" .$story_content),
     htmlspecialchars("Story id: ".$story_id),
-    //htmlspecialchars("Story Link:" .$link));
     htmlspecialchars("Number of likes: ".$numlikes));
-    echo "Link:";
-    echo "<a href=viewcontents.php?sid=$story_id&suser=$username>".$link."</a> ";
+    echo "Story Link:";
+
+    echo "<a href='".$link."?sid=".$story_id."&suser=".$username."'>".$link."</a> ";
+    echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
+    echo "<a href=viewcontents.php?sid=$story_id&suser=$username>View content</a> ";
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
     echo "<a href=comment.php?sid=$story_id&suser=$username>Comment on This Story</a>";
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";

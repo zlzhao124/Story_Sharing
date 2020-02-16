@@ -32,13 +32,15 @@
  $stmt->execute();
  $stmt->bind_result( $title, $link, $id) ;
 
- echo("View Stories<br />");
+ 
+
+ echo("--Stories this user published: <br />");
 echo "<br /><br />";
  while($stmt->fetch()){
     echo "<br />";
-    echo "Title: ".$title;
+    echo "Story Title: ".$title;
     echo "<br />";
-    echo "<a href=viewcontents.php?sid=$id&suser=$viewinguser>".$link."</a>";
+    echo "<a href=viewcontents.php?sid=$id&suser=$viewinguser>view content</a>";
     echo "<br /><br />";
 }
 $stmt->close();
@@ -78,11 +80,11 @@ $stmt3 = $mysqli->prepare("select s_username, story.story_title, story.link, sto
      exit;
  }
  $stmt3->execute();
-
 $stmt3->bind_result($storyuser, $storytitle, $link, $id);
 echo "<br /><br />";
+
 echo "<br /><br />";
- echo("Stories this user has liked<br />");
+ echo("--Stories this user has liked<br />");
 echo "<br /><br />";
  while($stmt3->fetch()){
     echo "<br />";
@@ -92,8 +94,8 @@ echo "<br /><br />";
     echo "<br />";
     echo "Story title: ".$storytitle;
     echo "<br />";
-    echo "Story link: ";
-    echo "<a href=viewcontents.php?sid=$id&suser=$storyuser>".$link."</a>";
+    echo "Story Content: ";
+    echo "<a href=viewcontents.php?sid=$id&suser=$storyuser>View content</a>";
     echo "<br /><br />";
 
 }

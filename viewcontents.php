@@ -38,6 +38,7 @@ echo "<br /><br />";
  while($stmt->fetch()){
     echo "Title:".$title;
     echo "<br /><br />";
+    echo "Story Content:";
     echo $content;
 }
 $stmt->close();
