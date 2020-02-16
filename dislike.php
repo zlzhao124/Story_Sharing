@@ -8,30 +8,24 @@ $username = $_GET['suser'];
 echo $story_id;
 
 
-/*
-$stmt1 = $mysqli->prepare("select count(*) from likestory");
+//first finds a count to see if a user has liked a post
+$stmt1 = $mysqli->prepare("select count(*) from likestory where liker = ? AND s_username = ? AND story_id = ?");
 if(!$stmt1){
         printf("Query Prep Failed: %s\n", $mysqli->error);
         exit;
     }
+$stmt1->bind_param('ssi', $currentuser, $username, $story_id);
+$stmt1->execute();
 $stmt1->bind_result($totallikesize);
 while($stmt1->fetch()){
     printf("%s<br />",
-    htmlspecialchars("Size:".$totallikesize));
+    htmlspecialchars("Total Likes Size:".$totallikesize));
 }
 
-
-
-
-
-if (!$stmt1->execute()){
-        echo "Fail to dislike";
-    }
-
-echo $totallikesize;
-*/
+//proceeds to delete any record where the user has liked the post
 
 $stmt2 = $mysqli->prepare("delete from likestory where liker = ? AND s_username = ? AND story_id = ?");
+//$stmt2 = $mysqli->prepare("delete from likestory where exists (select * from likestory where liker = ? AND s_username = ? AND story_id = ?)");
     if(!$stmt2){
         printf("Query Prep Failed: %s\n", $mysqli->error);
         exit;
@@ -42,21 +36,24 @@ $stmt2 = $mysqli->prepare("delete from likestory where liker = ? AND s_username 
     }
 
     else{
-/*
-$stmt3 = $mysqli->prepare("select count(*) from likestory");
+//find the new count to see if a user has liked a post, if the count went down, then a record was successfully deleted and we can decrease numlikes by 1
+$stmt3 = $mysqli->prepare("select count(*) from likestory where liker = ? AND s_username = ? AND story_id = ?");
 if(!$stmt3){
         printf("Query Prep Failed: %s\n", $mysqli->error);
         exit;
     }
-$stmt3->bind_result($totallikesize);
-if (!$stmt3->execute()){
-        echo "Fail to dislike";
-    }
+$stmt3->bind_param('ssi', $currentuser, $username, $story_id);
+$stmt3->execute();
+$stmt3->bind_result($totallikesize2);
+while($stmt3->fetch()){
+    printf("%s<br />",
+    htmlspecialchars("New Total Likes Size:".$totallikesize2));
+}
 
-echo $totallikesize2;
+
 
 if ($totallikesize2 < $totallikesize){
-*/
+
         $stmt = $mysqli->prepare("update story set numlikes=numlikes-1 where story_id=? AND username = ? ");
 if(!$stmt){
     printf("Query Prep Failed: %s\n", $mysqli->error);
@@ -69,11 +66,10 @@ $stmt->execute();
 }
 
 
-
+}
 
 
 
     $stmt2->close();
-
+    header("Location: mainpage.php");
 ?>
-
