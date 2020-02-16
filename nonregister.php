@@ -41,11 +41,12 @@
             echo "Username: ".$username."<br />";
            // echo "Link: ".$link."<br />";
             echo "Title: ".$story_title."<br />";
-           // echo "Content: ".$story_content."<br />";
             echo "ID: ".$story_id."<br /><br />";
             echo "View content:";
             echo "<a href=viewcontents.php?sid=$story_id&suser=$username>view content</a> ";
-            //echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
+            echo "<br /><br />";
+            echo "Link:";
+            echo "<a href='".$link."?sid=".$story_id."&suser=".$username."'>".$link."</a> ";
             echo "<br /><br />";
             echo "<a href=viewcomment.php?val=$story_id&suser=$username>View Story Comments</a>";
             echo "<br /><br />";
