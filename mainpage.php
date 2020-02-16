@@ -50,7 +50,6 @@
     htmlspecialchars("Story id: ".$story_id),
     htmlspecialchars("Number of likes: ".$numlikes));
     echo "Story Link:";
-
     echo "<a href='".$link."?sid=".$story_id."&suser=".$username."'>".$link."</a> ";
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
     echo "<a href=viewcontents.php?sid=$story_id&suser=$username>View content</a> ";

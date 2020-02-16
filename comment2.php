@@ -4,14 +4,7 @@ require 'database.php';
 include 'comment.php';
 $comment = $_POST['name'];
 $commID = $_POST['ID'];
-//     echo $c_username;
-//     echo "<br>";
-//     echo $s_username;
-// echo "<br>";
-//     echo $story_id;
-// echo "<br>";
-// echo $comment;
-// echo "<br>";
+
 
 //inserting our comment from comment.php into the sql table of comments
  $stmt = $mysqli->prepare("insert into comments(c_username, s_username, comment,story_id, comment_id) values (?,?, ?, ?,?)");
