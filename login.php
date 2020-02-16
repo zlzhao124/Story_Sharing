@@ -16,14 +16,12 @@ $stmt->fetch();
 $stmt->close();
 
 if(password_verify($pwd_guess, $hashedPass)){
-	// Login succeeded!
 	session_start();
 	$_SESSION['username'] = $username;
 	$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
 	header("Location: mainpage.php");
 	exit;
 } else{
-	// Login failed
 	 echo "login failed, passwords dont match!";
 	exit;
 }
