@@ -4,6 +4,8 @@
 
 
 Creative Portion
+
+
 •We added a like function to stories. Essentially, users can like and unlike any stories that they so choose. Users can like a story at most once.  
 
 •We added a segment where users can view the profile of all the registered users. This includes viewing their stories, comments, and stories they have liked.
