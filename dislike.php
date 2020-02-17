@@ -25,7 +25,6 @@ while($stmt1->fetch()){
 //proceeds to delete any record where the user has liked the post
 
 $stmt2 = $mysqli->prepare("delete from likestory where liker = ? AND s_username = ? AND story_id = ?");
-//$stmt2 = $mysqli->prepare("delete from likestory where exists (select * from likestory where liker = ? AND s_username = ? AND story_id = ?)");
     if(!$stmt2){
         printf("Query Prep Failed: %s\n", $mysqli->error);
         exit;
@@ -67,8 +66,6 @@ $stmt->execute();
 
 
 }
-
-
 
     $stmt2->close();
     header("Location: mainpage.php");

@@ -75,7 +75,6 @@ echo "<br /><br />";
     echo "<br /><br />";
 }
 $stmt2->close();
-
 // now it finally displays all the stories that the user has liked
 $stmt3 = $mysqli->prepare("select s_username, story.story_title, story.link, story.story_id from likestory join story on (likestory.story_id=story.story_id and likestory.s_username = story.username) where liker = ?");
 
@@ -120,6 +119,3 @@ $stmt3->close();
 
 </body>
 </html>
-
-
-

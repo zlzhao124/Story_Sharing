@@ -30,7 +30,7 @@
  $stmt->execute();
  $stmt->bind_result( $username) ;
 
- echo("View Users<br />");
+echo("View Users<br />");
 echo "<br /><br />";
  while($stmt->fetch()){
     echo "<br /><br />";

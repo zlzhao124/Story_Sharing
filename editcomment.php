@@ -21,7 +21,7 @@ $linkstring =  "editcomment2.php?sid=".$story_id."&suser=".$s_username."&comm=".
         <p>
                 <label for="name">Retype your comment here to update it:</label>
                 <textarea rows="6" cols="150" placeholder="Please type updated comment here." name="comment" id="comment"></textarea>
-
+                <input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
         </p>
         <p>
                 <input type="submit" value="Comment" />

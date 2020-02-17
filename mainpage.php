@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang = 'en'>
     <head>
@@ -41,7 +40,7 @@
  echo "Hi, our dear user  <i>".$username1."</i> ! Welcome to the Story Sharing Site!!<br />";
  echo "You can see a list of stories and their comments below.<br />";
  echo "<br /><br />";
-//above is the introduction message, below is code for printing out all the stories and various options for each of them. 
+//above is the introduction message, below is code for printing out all the stories and various options for each of them.
 
  while($stmt->fetch()){
     printf("%s,%s,%s, %s <br />",
@@ -49,8 +48,9 @@
     htmlspecialchars("Storytitle :".$story_title),
     htmlspecialchars("Story id: ".$story_id),
     htmlspecialchars("Number of likes: ".$numlikes));
+//  htmlspecialchars($link);
     echo "Story Link:";
-    echo "<a href='".$link."?sid=".$story_id."&suser=".$username."'>".$link."</a> ";
+    echo "<a href='".$link."'>".htmlspecialchars($link)."</a> ";
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
     echo "<a href=viewcontents.php?sid=$story_id&suser=$username>View content</a> ";
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
@@ -64,10 +64,9 @@
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
     echo "<a href=editstorytitle.php?sid=$story_id&suser=$username>Edit Story title or link</a>";//edit
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
-
-    echo "<a href=like.php?sid=$story_id&suser=$username>Like</a>";//ed
+    echo "<a href=like.php?sid=$story_id&suser=$username>Like</a>";//Like
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
-    echo "<a href=dislike.php?sid=$story_id&suser=$username>Dislike</a>";//ed
+    echo "<a href=dislike.php?sid=$story_id&suser=$username>Dislike</a>";//Unlike
     echo "<br /><br />";
 
 }
@@ -93,7 +92,6 @@ $stmt->close();
 <input type= "submit" name = "submit" value = "submit" />
 
 </form>
-
 
 <form action = "viewusercomment.php" methods = "POST">
 <label> Here you can view and edit all the comments you have made:</label>

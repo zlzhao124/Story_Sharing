@@ -21,11 +21,11 @@ $stmt2 = $mysqli->prepare("insert into likestory(liker, s_username, story_id) va
 //if the like was successful, increase the like count by 1 in the story table
     else{
         $stmt = $mysqli->prepare("update story set numlikes=numlikes+1 where story_id=? AND username = ? ");
-if(!$stmt){
-    printf("Query Prep Failed: %s\n", $mysqli->error);
-    echo "reached";
-    exit;
-}
+        if(!$stmt){
+            printf("Query Prep Failed: %s\n", $mysqli->error);
+            echo "reached";
+            exit;
+        }
 
 $stmt->bind_param('ss', $story_id, $username);
 $stmt->execute();

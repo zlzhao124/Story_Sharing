@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><title>Bold Printer</title></head>
+<head><title>Edit Link or Title</title></head>
 <body>
 
 <?php
@@ -27,9 +27,9 @@ if ($s_username!=$current_user){
         <p>
                 <label for="name">Retype your title or link here to update it:</label>
                 <input type="text" name="storytitle" id="storytitle" />
+                <input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
         </p>
-
-                       <br>
+                 <br>
                  <input type="radio" name="operation" value="Title" required> Title<br>
                  <input type="radio" name="operation" value="Link" required> Link<br>
 

@@ -20,17 +20,18 @@
  session_start();
  $user = $_SESSION['username'];
  //gets all the comments made by a user (returns the story and the comment)
- $stmt = $mysqli->prepare("select s_username,comment,story_id,comment_id from comments where c_username = '".$user."'");
+ $stmt = $mysqli->prepare("select s_username,comment,story_id,comment_id from comments where c_username = ?");
 
  if(!$stmt)
  {
      printf("Query Prep Failed: %s\n", $mysqli->error);
      exit;
  }
+ $stmt->bind_param('s',$user);
  $stmt->execute();
  $stmt->bind_result( $s_username,$comment, $story_id, $comment_id) ;
 
- echo("View Comments<br />");
+echo("View Comments<br />");
 echo "<br /><br />";
  while($stmt->fetch()){
     echo "<br /><br />";
@@ -44,8 +45,6 @@ echo "<br /><br />";
     echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
 }
 $stmt->close();
-
-
 
 ?>
 

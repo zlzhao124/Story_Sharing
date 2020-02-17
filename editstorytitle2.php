@@ -10,8 +10,14 @@ echo "<br>";
 echo "<br>";
 echo $update;
 
+
+if(!hash_equals($_SESSION['token'], $_POST['token'])){
+        die("Error editing");
+}
+else{
+
 if (assert( $_POST["operation"])){
-//echo "reached if statement";
+
 
 
 switch($_POST["operation"]){
@@ -55,4 +61,7 @@ default:
 else {
         echo "fail to update";
 }
+
+}
+
 ?>

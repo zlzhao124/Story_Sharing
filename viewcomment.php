@@ -24,13 +24,14 @@
  $suser = $_GET['suser'];
 
 //gets all the comments for a story
- $stmt = $mysqli->prepare("select c_username,comment,story_id from comments where story_id =".$storyid." AND s_username = '".$suser."'");
-
+// $stmt = $mysqli->prepare("select c_username,comment,story_id from comments where story_id =".$storyid." AND s_username = '".$suser."'");
+$stmt = $mysqli->prepare("select c_username,comment,story_id from comments where story_id = ? AND s_username = ?");
  if(!$stmt)
  {
      printf("Query Prep Failed: %s\n", $mysqli->error);
      exit;
  }
+ $stmt->bind_param('ss', $storyid, $suser);
  $stmt->execute();
  $stmt->bind_result( $c_username,$comment, $story_id) ;
 
@@ -48,4 +49,3 @@ $stmt->close();
 ?>
 </body>
 </html>
-

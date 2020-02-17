@@ -23,7 +23,7 @@
 <?php
  require 'database.php';
  session_start();
-//as a nonregistered user, only stories and comments can be viewed. ON this page one can view stories, and we can click on each 
+//as a nonregistered user, only stories and comments can be viewed. ON this page one can view stories, and we can click on each
 //specific story to view all the comments
  $stmt = $mysqli->prepare("select username, story_title, story_content, link, story_id from story");
 
@@ -44,12 +44,12 @@
             echo "ID: ".$story_id."<br /><br />";
             echo "View content:";
             echo "<a href=viewcontents.php?sid=$story_id&suser=$username>view content</a> ";
-            echo "<br /><br />";
+            echo "<br />";
             echo "Link:";
-            echo "<a href='".$link."?sid=".$story_id."&suser=".$username."'>".$link."</a> ";
-            echo "<br /><br />";
+            echo "<a href='".$link."'>".htmlspecialchars($link)."</a> ";
+            echo "<br />";
             echo "<a href=viewcomment.php?val=$story_id&suser=$username>View Story Comments</a>";
-            echo "<br /><br />";
+            echo "<br />";
         }
         $stmt->close();
 
