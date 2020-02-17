@@ -4,7 +4,7 @@
 
 
 Helen Jiang Instance:  http://ec2-54-245-201-215.us-west-2.compute.amazonaws.com/~jzy/login.html
-
+Zach Zhao instance: http://ec2-107-23-252-146.compute-1.amazonaws.com/~zlzhao124/mod3/login.html
 
 
 Creative Portion
