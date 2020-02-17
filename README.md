@@ -6,6 +6,9 @@
 Helen Jiang Instance:  http://ec2-54-245-201-215.us-west-2.compute.amazonaws.com/~jzy/login.html
 Zach Zhao instance: http://ec2-107-23-252-146.compute-1.amazonaws.com/~zlzhao124/mod3/login.html
 
+Note: if something redirects automatically back to the mainpage, check other pages like view comments to see if the task was successful.  
+If an attempt to click on something on the mainpage fails, then it is probably our project not letting you do the command for a reason. For instance, we do not let users edit or delete other users' stories.
+
 
 Creative Portion
 
